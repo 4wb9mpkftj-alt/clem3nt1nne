@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8M - Editorial Visual</title>
+    <style>
+        :root {
+            --primary-purple: #7b2cb7;
+            --secondary-purple: #3c096c;
+            --bright-pink: #ff006e;
+            --bg-light: #f3e8ff;
+            --font-display: 'Arial Black', sans-serif;
+            --font-serif: 'Georgia', serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;900&family=Work+Sans:wght@300;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Work Sans', sans-serif;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* ELEMENTOS GRÁFICOS DE FONDO */
+        .decor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .star {
+            width: clamp(40px, 10vw, 80px);
+            height: clamp(40px, 10vw, 80px);
+            background: var(--bright-pink);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            top: 5%; right: 5%;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* HEADER IMPACTANTE - MOBILE FIRST */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Apilado en mobile */
+            background-color: var(--primary-purple);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 900px) {
+            .hero-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-left {
+            padding: clamp(20px, 5vw, 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-image: radial-gradient(var(--secondary-purple) 2px, transparent 2px);
+            background-size: 20px 20px;
+            z-index: 2;
+        }
+
+        .hero-left h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: clamp(3rem, 15vw, 12vw); /* Tamaño fluido */
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        @media (min-width: 900px) {
+            .hero-left h1 { letter-spacing: -5px; }
+        }
+
+        .hero-right {
+            position: relative;
+            background: var(--bright-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40vh;
+        }
+
+        .hero-right img {
+            width: 90%;
+            height: 80%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.5);
+            mix-blend-mode: multiply;
+        }
+
+        .subtitle-banner {
+            background: black;
+            color: white;
+            padding: 10px 20px;
+            font-family: 'Unbounded';
+            font-size: clamp(0.8rem, 4vw, 1.5rem);
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            transform: rotate(-3deg);
+            white-space: nowrap;
+        }
+
+        /* SECCIÓN EDITORIAL */
+        .editorial-spread {
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 1fr; /* Una columna en mobile */
+            gap: 40px;
+            padding: 0 25px;
+        }
+
+        @media (min-width: 900px) {
+            .editorial-spread {
+                grid-template-columns: 1fr 1fr;
+                margin: 100px auto;
+                gap: 60px;
+            }
+        }
+
+        .column h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 20px;
+            color: var(--secondary-purple);
+            line-height: 1;
+        }
+
+        .column p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* GALERÍA DE FOTOS */
+        .gallery-section {
+            background: white;
+            padding: 60px 15px;
+            border-top: 8px solid black;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-title h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.5rem, 8vw, 3.5rem);
+            display: inline-block;
+            background: var(--bright-pink);
+            color: white;
+            padding: 10px 25px;
+            transform: skewX(-5deg);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Una sola foto por fila en mobile */
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1000px) {
+            .photo-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .photo-card {
+            background: #fff;
+            padding: 12px 12px 40px 12px;
+            border: 2px solid black;
+            position: relative;
+            transition: 0.3s;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9; /* Mantiene el formato de foto1.jpg */
+            object-fit: cover;
+            display: block;
+            border: 1px solid #eee;
+        }
+
+        .photo-tag {
+            background: black;
+            color: white;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-family: monospace;
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+        }
+
+        /* BARRA DE STAMPS - ADAPTADA PARA CELULAR */
+        .stamps-bar {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .stamp {
+            width: 80px; /* Un poco más pequeños en mobile */
+            height: 18px;
+            background-color: var(--secondary-purple);
+            border: 1px solid white;
+            font-size: 7px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            font-family: monospace;
+            box-shadow: 2px 2px 0px black;
+        }
+
+        /* FOOTER */
+        footer {
+            background: black;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        footer h2 {
+            font-family: 'Unbounded';
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decor star"></div>
+    
+    <div class="stamps-bar">
+        <div class="stamp">GIRL_POWER</div>
+        <div class="stamp" style="background: var(--bright-pink);">RIOT_GRRRL</div>
+        <div class="stamp">MEMORIA_8M</div>
+    </div>
+
+    <!-- SECCIÓN DE PORTADA -->
+    <header class="hero-section">
+        <div class="hero-left">
+            <h1>NACIMOS<br>PARA<br>VENCER</h1>
+        </div>
+        <div class="hero-right">
+            <img src="images/foto2.jpg" alt="Protesta">
+            <div class="subtitle-banner">MARCHA FEMINISTA 2026</div>
+        </div>
+    </header>
+
+    <!-- EDITORIAL -->
+    <section class="editorial-spread">
+        <div class="column">
+            <h2>COMUNICAR<br>CON PODER</h2>
+            <p>Las personas no recuerdan solo datos o argumentos; recuerdan cómo las hiciste sentir. La comunicación más efectiva no es la que informa, sino la que provoca una reacción emocional. El color, el tono y las imágenes son elementos que marcan la diferencia entre un registro olvidado y uno que deja huella.</p>
+        </div>
+        <div class="column">
+            <p style="border-left: 5px solid var(--bright-pink); padding-left: 20px; margin-top: 10px;">
+                <strong>EL PODER DE LA EMOCIÓN:</strong> En un mundo saturado de imágenes, el registro de la lucha feminista debe ser audaz. No se pide permiso para existir, y tampoco para ser vista. Este archivo visual es testimonio de esa fuerza imparable.
+            </p>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE IMÁGENES -->
+    <section class="gallery-section">
+        <div class="gallery-title">
+            <h3>REGISTRO VISUAL</h3>
+        </div>
+        
+        <div class="photo-grid" id="main-gallery">
+            <!-- Las 71 fotos se inyectan aquí -->
+        </div>
+    </section>
+
+    <footer>
+        <h2>LA LUCHA SIGUE.</h2>
+        <p style="font-size: 12px; opacity: 0.7;">clem3nt1nne © 2026</p>
+    </footer>
+
+    <script>
+        const gallery = document.getElementById('main-gallery');
+        const totalPhotos = 71;
+        let galleryHTML = '';
+
+        for (let i = 1; i <= totalPhotos; i++) {
+            galleryHTML += `
+                <article class="photo-card">
+                    <img src="images/foto${i}.jpg" alt="Foto ${i}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="photo-tag">FRAME_8M_0${i}</div>
+                </article>
+            `;
+        }
+        gallery.innerHTML = galleryHTML;
+    </script>
+
+</body>
+</html>
